@@ -12,6 +12,15 @@ function App() {
   return (
     <div>
       <pre>{JSON.stringify(data, null, 2)}</pre>
+      {data &&
+        data.map((item) => {
+          return (
+            <div key={item.id}>
+              <h3>name: {item.title}</h3>
+              <p>id: {item.id}</p>
+            </div>
+          );
+        })}
     </div>
   );
 }
