@@ -1,24 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [counter, setCounter] = useState(0);
-  const [currentText, setCurrentText] = useState("demo");
+  const [data, setData] = useState(null);
 
-  function handleClick() {
-    setCounter(counter + 100);
-  }
-
-  function handleChange(event) {
-    setCurrentText(event.target.value);
-  }
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=5")
+      .then((response) => response.json())
+      .then((value) => setData(value));
+  }, []);
 
   return (
     <div>
-      <p>{counter}</p>
-      <button onClick={handleClick}>Add one</button>
-      <br />
-      <input type="text" onChange={handleChange} />
-      <p>{currentText}</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }
