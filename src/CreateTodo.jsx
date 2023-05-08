@@ -6,7 +6,7 @@ export const CreateTodo = () => {
   const [title, setTitle] = useState("");
   const [completed, setCompleted] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const body = {
       id: 1,
       userId: 1,
@@ -14,10 +14,15 @@ export const CreateTodo = () => {
       completed: completed,
     };
 
-    axios
-      .put("https://jsonplaceholder.typicode.com/todos/1", body)
-      .then((response) => console.log(response.data))
-      .catch((error) => console.log({ error: error }));
+    try {
+      const response = await axios.put(
+        "https://jsonplaceholder.typicode.com/todos/1",
+        body
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
