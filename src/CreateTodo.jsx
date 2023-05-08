@@ -1,10 +1,4 @@
 import { useState } from "react";
-// {
-//     "userId": 1,
-//     "id": 1,
-//     "title": "delectus aut autem",
-//     "completed": false
-//  }
 
 export const CreateTodo = () => {
   const [userId, setUserId] = useState("");
@@ -12,10 +6,11 @@ export const CreateTodo = () => {
   const [completed, setCompleted] = useState(false);
 
   const handleClick = () => {
-    fetch("https://jsonplaceholder.typicode.com/todos", {
-      method: "POST",
+    fetch("https://jsonplaceholder.typicode.com/todos/1", {
+      method: "PUT",
       body: JSON.stringify({
-        userId: userId,
+        id: 1,
+        userId: 1,
         title: title,
         completed: completed,
       }),
@@ -30,11 +25,11 @@ export const CreateTodo = () => {
 
   return (
     <div>
-      <label>userId:</label>
+      {/* <label>userId:</label>
       <input
         type="number"
         onChange={(event) => setUserId(Number(event.target.value))}
-      />
+      /> */}
       <br />
       <label>title:</label>
       <input type="text" onChange={(event) => setTitle(event.target.value)} />
@@ -42,7 +37,7 @@ export const CreateTodo = () => {
       <label>completed:</label>
       <input type="checkbox" onChange={() => setCompleted(!completed)} />
       <br />
-      <button onClick={handleClick}>Post Data</button>
+      <button onClick={handleClick}>Update Data</button>
     </div>
   );
 };
