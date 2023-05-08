@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 export const CreateTodo = () => {
   const [userId, setUserId] = useState("");
@@ -6,20 +7,16 @@ export const CreateTodo = () => {
   const [completed, setCompleted] = useState(false);
 
   const handleClick = () => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1", {
-      method: "PUT",
-      body: JSON.stringify({
-        id: 1,
-        userId: 1,
-        title: title,
-        completed: completed,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json))
+    const body = {
+      id: 1,
+      userId: 1,
+      title: title,
+      completed: completed,
+    };
+
+    axios
+      .put("https://jsonplaceholder.typicode.com/todos/1", body)
+      .then((response) => console.log(response.data))
       .catch((error) => console.log({ error: error }));
   };
 
